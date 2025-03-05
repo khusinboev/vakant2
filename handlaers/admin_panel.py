@@ -9,7 +9,7 @@ from function.functions import *
 async def coder(msg: types.Message):
 	await msg.reply("Bot dasturchisi @coder_admin_py\n\nPowered by @coder_admin_py", parse_mode='html')
 
-Admin = [5246872049, 619839487]
+Admin = [5246872049, 619839487, 1918760732]
 markup = ReplyKeyboardMarkup(resize_keyboard=True)
 markup.add("🔙Orqaga qaytish")
 @dp.message_handler(commands=['admin', 'panel'], user_id = Admin)

@@ -131,7 +131,9 @@ async def search_vakant(user_id, page):
                 position_salary = i['position_salary']
                 if position_salary == None:
                     position_salary = "Mavjud emas"
-                location = i['region']['name_uz_ln'] + ' ' + i['district']['name_uz_ln']
+                if i['region']:
+                    location = i['region']['name_uz_ln'] + ' ' + i['district']['name_uz_ln']
+                else: location = "Aniqlanmadi"
                 texts += f"""<b>👨‍💻{num}- Vakansiya\n\n🆔ID raqami: </b>{id}\n<b>🏢Ish beruvchi nomi: </b>{company_name}\n<b>💰Taxminiy maoshi: </b>{position_salary} so'm\n<b>📍Joylashuvi: </b>{location}\n\n➖➖➖➖➖➖➖➖➖➖\n\n"""
                 num += 1
                 ids.append(id)
@@ -259,22 +261,26 @@ async def special_btn(user_id):
 #######################
 
 async def saves_info(data):
-    soup = await get_site_content(f'https://ishapi.mehnat.uz/api/v1/vacancies/{data}')
-    soup1 = soup['data']
-    status = soup1["active"]
-    if status == True:
-        status = "Aktiv"
+    url = f'https://ishapi.mehnat.uz/api/v1/vacancies/{data}'
+    soup = await get_site_content(url)
+    if soup["success"]:
+        soup1 = soup['data']
+        status = soup1["active"]
+        if status == True:
+            status = "Aktiv"
+        else:
+            status = "Band"
+        comp_name = soup1['company_name']
+        work_title = soup1['position_name']
+        salary = soup1['position_salary']
+        commitment = soup1['position_duties']
+        demand = soup1['position_requirements']
+        condition = soup1['position_conditions']
+        phones = soup1['phones']
+        address = str(soup1['region']['name_uz_ln']) + ', ' + str(soup1['district']['name_uz_ln'])
+        text = f"<b>🏢Komponiya nomi: </b>{comp_name}\n<b>🧑‍🏭Ish nomi: </b>{work_title}\n\n<b>ℹ️Ish haqida: </b>{condition}\n\n<b>📌Majburiyatlari: </b>{commitment}\n\n<b>📎Talab: </b>{demand}\n\n<b>💸Maoshi: </b>{salary}\n\n\n<b>📣Ishning holati: </b>{status}\n<b>🗺Manzili: </b>{address}\n<b>📞Telefon raqami: </b>+{phones[0]}"
     else:
-        status = "Band"
-    comp_name = soup1['company_name']
-    work_title = soup1['position_name']
-    salary = soup1['position_salary']
-    commitment = soup1['position_duties']
-    demand = soup1['position_requirements']
-    condition = soup1['position_conditions']
-    phones = soup1['phones']
-    address = str(soup1['region']['name_uz_ln']) + ', ' + str(soup1['district']['name_uz_ln'])
-    text = f"<b>🏢Komponiya nomi: </b>{comp_name}\n<b>🧑‍🏭Ish nomi: </b>{work_title}\n\n<b>ℹ️Ish haqida: </b>{condition}\n\n<b>📌Majburiyatlari: </b>{commitment}\n\n<b>📎Talab: </b>{demand}\n\n<b>💸Maoshi: </b>{salary}\n\n\n<b>📣Ishning holati: </b>{status}\n<b>🗺Manzili: </b>{address}\n<b>📞Telefon raqami: </b>+{phones[0]}"
+        text = "Not Found"
     return text
 
 
