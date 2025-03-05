@@ -28,6 +28,7 @@ async def search(message: types.Message):
                     await message.answer(text=f"{texts[2]}\n{texts[0]}", reply_markup=await vacancie_btn(texts[1], texts[2], texts[3]))
                 except:
                     await message.answer(texts[0])
+                    await message.answer("saloooom")
                 try:
                     await send.delete()
                 except:
