@@ -5,7 +5,6 @@ from aiogram import *
 from aiogram.types import *
 import asyncio
 import aiohttp
-from aiohttp_proxy import ProxyConnector, ProxyType
 
 
 ###   Admin panel uchun kerakli funksiyalar
