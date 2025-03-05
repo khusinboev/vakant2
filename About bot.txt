@@ -1,0 +1,18 @@
+Bu botdagi hamma ma'lumotlar ish.mehnat.uz saytiga ulangan, ya'ni bot ma'lumotlarni shu saytdan pars yordamida oladi
+
+
+Botning foydalanuvchiga ko'rinadigan qismi main.py qismida yozilgan
+
+Avvalo botga /start bosganda, unga javob berish va userning ma'lumotlarini saqlash handlers dagi startFor.py fayilida yozilgan.
+
+keyin qolgan qismini main.py dagi kodlar bajaradi. 
+
+buttons/mButtons.py da buttonlarning kodi yozilgan, ammo hammasiniki emas
+
+databasa/database bu botning bazasi, sqlite3 da
+
+function/functions.py da funksiyalar, admin panel uchun kerakllilar, parsing uchun keraklilari, ko'p tugmalarni chiqarish uchun kerakli funksiyalar...
+
+handlers/....
+
+ee hullas jonga tegdi, tasnif yozish. agar u bu nmaga tushunmasaz tg dan menga yozing @coder_admin_py
