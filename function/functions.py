@@ -1,4 +1,7 @@
 from sqlite3 import connect
+
+from aiohttp_proxy import ProxyConnector
+
 from key import *
 from databas import *
 from aiogram import *
@@ -75,9 +78,10 @@ async def send_message_chats(chat_id: int, from_chat_id: int, message_id: int) -
 ##    Parsing uchun funksiya
 
 async def get_site_content(URL):
-    #connector = ProxyConnector.from_url('socks5://ahusinboyev6734:58c1ce@185.102.73.44:10126')  connector=connector
+    # connector = ProxyConnector.from_url('socks5://ahusinboyev6734:58c1ce@185.102.73.44:10126') connector=connector
+    proxy_url = "http://213.230.127.137:3128"
     async with aiohttp.ClientSession() as session:
-        async with session.get(URL, ssl=False) as resp:
+        async with session.get(URL, proxy=proxy_url, ssl=False) as resp:
             text = await resp.json()
     return text
 
